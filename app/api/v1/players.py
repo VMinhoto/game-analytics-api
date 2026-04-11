@@ -1,10 +1,5 @@
 """
 Player endpoints.
-
-Notice how thin these handlers are — validate input, call service,
-return response.  No business logic, no database queries, no
-calculations.  If a handler is longer than ~10 lines, something
-probably belongs in the service layer instead.
 """
 
 from fastapi import APIRouter, Depends, HTTPException, Query
