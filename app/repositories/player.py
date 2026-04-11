@@ -2,9 +2,7 @@
 SQLAlchemy implementation of the player repository.
 
 This is the ONLY module in the project that contains database queries.
-Every other module works through the abstract interface.  If you ever
-need to swap databases, you write a new implementation of
-AbstractPlayerRepository — nothing else changes.
+Every other module works through the abstract interface.  
 """
 
 from typing import Any
@@ -32,7 +30,6 @@ class SQLAlchemyPlayerRepository(AbstractPlayerRepository):
         auto-incrementing primary key, the highest id for a given
         player is always the newest snapshot.
 
-        This is the "get latest snapshot" pattern discussed earlier.
         """
         return (
             select(
@@ -86,9 +83,6 @@ class SQLAlchemyPlayerRepository(AbstractPlayerRepository):
         )
 
         # Step 3: Apply optional filters dynamically.
-        # This pattern — building the query conditionally — is very
-        # common in real APIs where users can filter by any combination
-        # of fields.
         if continent is not None:
             query = query.where(MultiInfo.continent == continent)
         if has_captcha is not None:

@@ -1,23 +1,5 @@
 """
 Abstract repository interface.
-
-This is the heart of the Repository Pattern and the key to making
-the database swappable.  The service layer codes against THIS
-abstraction — it never imports SQLAlchemy, never writes SQL, never
-knows what database is underneath.
-
-Why this matters (SOLID principles):
-    - Single Responsibility: repositories handle data access only.
-    - Open/Closed: add a new backend (e.g. MongoDB) by writing a new
-      class, not by modifying existing code.
-    - Dependency Inversion: high-level modules (services) depend on
-      this abstraction, not on low-level database details.
-
-Interview tip: if asked "why not just use SQLAlchemy directly in
-your routes?", the answer is testability + flexibility.  With this
-pattern, unit tests inject a fake repo (no DB needed), and swapping
-from Postgres to DynamoDB means writing one new file — not rewriting
-every service method.
 """
 
 from abc import ABC, abstractmethod
@@ -27,9 +9,6 @@ from typing import Any
 class AbstractPlayerRepository(ABC):
     """
     Contract that any player data store must fulfill.
-
-    Implement this for Postgres, SQLite, a CSV file, or even a
-    hardcoded dict — the service layer will never know the difference.
     """
 
     @abstractmethod
