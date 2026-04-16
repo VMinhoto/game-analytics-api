@@ -52,7 +52,7 @@ class SQLAlchemyPlayerRepository(AbstractPlayerRepository):
         result = await self._session.execute(
             select(MultiInfo)
             .where(MultiInfo.player_id == player_id)
-            .order_by(MultiInfo.created_at.desc())
+            .order_by(MultiInfo.id.desc())
             .limit(1)
         )
         return result.scalar_one_or_none()
@@ -126,7 +126,7 @@ class SQLAlchemyPlayerRepository(AbstractPlayerRepository):
         result = await self._session.execute(
             select(MultiInfo)
             .where(MultiInfo.player_id == player_id)
-            .order_by(MultiInfo.created_at.desc())
+            .order_by(MultiInfo.id.desc())
             .limit(limit)
         )
         return list(result.scalars().all())
