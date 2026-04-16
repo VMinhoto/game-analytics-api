@@ -28,6 +28,8 @@ class TestInMemoryEventBus:
 
         bus.subscribe("snapshot.created", handler)
         event = SnapshotCreatedEvent(player_id=1, player_name="Alice")
+
+
         await bus.publish(event)
 
         assert len(received) == 1
@@ -40,6 +42,7 @@ class TestInMemoryEventBus:
             received.append(event)
 
         bus.subscribe("anomaly.detected", handler)
+
 
         # Publish a different event type.
         await bus.publish(SnapshotCreatedEvent(player_id=1))
@@ -60,6 +63,8 @@ class TestInMemoryEventBus:
 
         bus.subscribe("snapshot.created", handler_a)
         bus.subscribe("snapshot.created", handler_b)
+
+
         await bus.publish(SnapshotCreatedEvent())
 
         assert results["a"] is True
@@ -76,6 +81,8 @@ class TestInMemoryEventBus:
 
         bus.subscribe("snapshot.created", bad_handler)
         bus.subscribe("snapshot.created", good_handler)
+
+
         await bus.publish(SnapshotCreatedEvent())
 
         # Good handler still executed despite bad handler failing.
@@ -89,9 +96,12 @@ class TestInMemoryEventBus:
             continent=55,
         )
         data = event.to_dict()
+        json_str = event.to_json()
+
+        
         assert data["player_id"] == 5
         assert data["event_type"] == "snapshot.created"
         assert "timestamp" in data
 
-        json_str = event.to_json()
+
         assert '"player_name": "Alice"' in json_str
