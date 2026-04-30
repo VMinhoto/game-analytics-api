@@ -72,6 +72,7 @@ class PlayerService:
                 continent=r.continent,
                 latest_snapshot=r.created_at,
                 total_resources=r.total_resources(),
+                total_pp=r.premium_points_nr,
             )
             for r in rows
         ]

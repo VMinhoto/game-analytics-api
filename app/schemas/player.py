@@ -54,6 +54,7 @@ class PlayerSummary(BaseModel):
     continent: int
     latest_snapshot: datetime
     total_resources: int
+    total_pp: int
 
 
 # ---------------------------------------------------------------------------

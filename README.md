@@ -51,7 +51,7 @@ The project follows a strict **layered architecture** where each layer depends o
 ### Local development
 
 ```bash
-git clone https://github.com/your-username/game-analytics-api.git
+git clone https://github.com/VMinhoto/game-analytics-api.git
 cd game-analytics-api
 
 python -m venv venv
